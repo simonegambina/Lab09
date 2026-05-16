@@ -6,39 +6,44 @@ class View(ft.UserControl):
         super().__init__()
         # page stuff
         self._page = page
-        self._page.title = "Template application using MVC and DAO"
-        self._page.horizontal_alignment = 'CENTER'
+        self._page.title = "LAB 09 - Analisi aeroporti"
+        self._page.horizontal_alignment = ft.CrossAxisAlignment.CENTER
         self._page.theme_mode = ft.ThemeMode.DARK
         # controller (it is not initialized. Must be initialized in the main, after the controller is created)
         self._controller = None
         # graphical elements
         self._title = None
-        self.txt_name = None
-        self.btn_hello = None
+        self.txt_distance = None
+        self.btn_analizza = None
         self.txt_result = None
-        self.txt_container = None
 
     def load_interface(self):
         # title
-        self._title = ft.Text("Hello World", color="blue", size=24)
+        self._title = ft.Text("Analisi aeroporti", color="blue", size=24)
         self._page.controls.append(self._title)
 
         #ROW with some controls
-        # text field for the name
-        self.txt_name = ft.TextField(
-            label="name",
-            width=200,
-            hint_text="Insert a your name"
-        )
+        self.txt_distance = ft.TextField(
+            label="Distanza minima percorsa",
+            width=250,
+            hint_text="Inserisci distanza in miglia (es. 500)")
 
         # button for the "hello" reply
-        self.btn_hello = ft.ElevatedButton(text="Hello", on_click=self._controller.handle_hello)
-        row1 = ft.Row([self.txt_name, self.btn_hello],
+        self.btn_analizza = ft.ElevatedButton(
+            text="Analizza aeroporti",
+            on_click=self._controller.handle_analizza)
+
+        row1 = ft.Row([self.txt_distance, self.btn_analizza],
                       alignment=ft.MainAxisAlignment.CENTER)
+
         self._page.controls.append(row1)
 
-        # List View where the reply is printed
-        self.txt_result = ft.ListView(expand=1, spacing=10, padding=20, auto_scroll=True)
+        self.txt_result = ft.ListView(
+            expand=1,
+            spacing=10,
+            padding=20,
+            auto_scroll=True)
+
         self._page.controls.append(self.txt_result)
         self._page.update()
 
